@@ -24,6 +24,7 @@ module.exports = function(sequelize, DataTypes) {
       defaultValue: '0'
     }
   }, {
-    tableName: 'wp_terms'
+    tableName: 'wp_terms',
+    timestamps: false
   });
 };

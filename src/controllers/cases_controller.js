@@ -24,9 +24,9 @@ class CasesController {
         //Get paginated list of notes
         try {
           let context = await Promise.hash({
+            page: page, // 当前页面信息, 决定当前页面类型，
             archiveBase: '',
             pages: mainmenu,
-            page: page, // 当前页面信息, 决定当前页面类型，
             title: pageTitle(),
             // Primary page content
             posts: wp.posts().page( pages.current ),

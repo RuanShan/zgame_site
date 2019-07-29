@@ -20,6 +20,7 @@ module.exports = function(sequelize, DataTypes) {
       defaultValue: '0'
     }
   }, {
-    tableName: 'wp_term_relationships'
+    tableName: 'wp_term_relationships',
+    timestamps: false
   });
 };

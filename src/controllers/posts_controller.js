@@ -3,7 +3,8 @@ require('promise-hash')
 const {
   WpPost,
   WpTerm,
-  WpTermTaxonomySequelize
+  WpTermTaxonomy,
+  Sequelize
 } = require('../models')
 const wp = require('../services/wp');
 const contentService = require('../services/content-service');
@@ -39,59 +40,58 @@ class PostsController {
       }]
     })
 
-    let termTaxonomies = WpTermTaxonomy.findAll({
-      where: {
-        parent: 9
-      },
-      includes: [{
-        association: 'WpTerm'
-      }, {
-        association: 'WpPost'
-      }]
-    })
+    // let termTaxonomies = WpTermTaxonomy.findAll({
+    //   where: {
+    //     parent: 9
+    //   },
+    //   includes: [{
+    //     association: 'WpTerm'
+    //   }, {
+    //     association: 'WpPost'
+    //   }]
+    // })
 
     // 找到最近的12篇文章
     const termTaxonomyIds = terms.map((term) => {
       return term.getWpTermTaxonomy().term_taxonomy_id
     })
     const posts = WpPost.findAll({
-        include: [{
-          association: 'WpTermTaxonomy',
-          where: {
-            menu_order: {
-              [Op.in]: termTaxonomyIds
-            }
+      include: [{
+        association: 'WpTermTaxonomy',
+        where: {
+          menu_order: {
+            [Op.in]: termTaxonomyIds
           }
-        }]
-      }
+        }
+      }]
     })
-  const page = {
-    menu_order: 2
+    const page = {
+      menu_order: 2
+    }
+    page.cssClass = getPageCssClass(page)
+    //Get paginated list of notes
+    try {
+      let context = await Promise.hash({
+        archiveBase: '',
+        pages: mainmenu,
+        page: page, // 当前页面信息, 决定当前页面类型，
+        terms: terms, // 新闻分类
+        title: pageTitle(),
+        // Primary page content
+        posts: wp.posts().page(pages.current),
+        sidebar: contentService.getSidebarContent()
+      })
+
+      await ctx.render('posts', context)
+
+    } catch (error) {
+      console.log(error)
+      ctx.throw(400, 'INVALID_DATA' + error)
+    }
   }
-  page.cssClass = getPageCssClass(page)
-  //Get paginated list of notes
-  try {
-    let context = await Promise.hash({
-      archiveBase: '',
-      pages: mainmenu,
-      page: page, // 当前页面信息, 决定当前页面类型，
-      terms: terms, // 新闻分类
-      title: pageTitle(),
-      // Primary page content
-      posts: wp.posts().page(pages.current),
-      sidebar: contentService.getSidebarContent()
-    })
+  async show(ctx) {
 
-    await ctx.render('posts', context)
-
-  } catch (error) {
-    console.log(error)
-    ctx.throw(400, 'INVALID_DATA' + error)
   }
-}
-async show(ctx) {
-
-}
 
 }
 

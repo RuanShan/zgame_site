@@ -22,6 +22,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true
     }
   }, {
-    tableName: 'wp_termmeta'
+    tableName: 'wp_termmeta',
+    timestamps: false    
   });
 };

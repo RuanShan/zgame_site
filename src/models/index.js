@@ -30,8 +30,8 @@ db.WpTerm.hasOne( db.WpTermTaxonomy)
 db.WpTermTaxonomy.belongsTo( db.WpTerm)
 // post N:M term_taxonomy
 //db.WpPost.hasMany(db.WpTermRelationships, { foreignKey: 'object_id' })
-db.WpPost.belongsToMany(db.WpTermTaxonomy, { through: WpTermRelationships, foreignKey: 'object_id' })
-db.WpTermTaxonomy.belongsToMany(db.WpPost, { through: WpTermRelationships, otherKey: 'object_id' })
+db.WpPost.belongsToMany(db.WpTermTaxonomy, { through: db.WpTermRelationships, foreignKey: 'object_id' })
+db.WpTermTaxonomy.belongsToMany(db.WpPost, { through: db.WpTermRelationships, otherKey: 'object_id' })
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;

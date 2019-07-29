@@ -9,15 +9,16 @@ import PostsController from '../controllers/posts_controller'
 import CasesController from '../controllers/cases_controller'
 
 const homeController = new HomeController()
+const postsController = new PostsController()
 const casesController = new CasesController()
 
 router.get( '/', homeController.index );
 router.get( '/news', postsController.index );
 router.get( '/news/:category', postsController.index );
 router.get( '/news/:category/:slug', postsController.show );
-router.get( '/cases', casesController.index );
-router.get( '/cases/:category', casesController.index );
-router.get( '/cases/:category/:slug', casesController.show );
+router.get( '/case', casesController.index );
+router.get( '/case/:category', casesController.index );
+router.get( '/case/:category/:slug', casesController.show );
 // router.get( '/page/:page', require( './index' ) );
 // // router.use( '/search', require( './search' ) );
 // // router.use( '/:year/:month', require( './archive-year-month' ) );

@@ -33,6 +33,7 @@ module.exports = function(sequelize, DataTypes) {
       defaultValue: '0'
     }
   }, {
-    tableName: 'wp_term_taxonomy'
+    tableName: 'wp_term_taxonomy',
+    timestamps: false    
   });
 };

@@ -20,7 +20,8 @@ const Op = Sequelize.Op;
 
 class PostsController {
   async index(ctx) {
-    const query = ctx.query
+    const category = ctx.params.category
+
     let pages = pageNumbers(ctx.params.page);
     const mainmenu = WpPost.scope(['isPage']).findAll({
       where: {
@@ -32,7 +33,7 @@ class PostsController {
     })
     // news id = 9
     const terms = await WpTerm.findAll({
-      includes: [{
+      include: [{
         association: 'WpTermTaxonomy',
         where: {
           parent: 9
@@ -52,14 +53,15 @@ class PostsController {
     // })
 
     // 找到最近的12篇文章
-    const termTaxonomyIds = terms.map((term) => {
+    const termTaxonomyIds = []
+    terms.map((term) => {
       return term.getWpTermTaxonomy().term_taxonomy_id
     })
     const posts = WpPost.findAll({
       include: [{
-        association: 'WpTermTaxonomy',
+        association: 'WpTermTaxonomies',
         where: {
-          menu_order: {
+          term_taxonomy_id: {
             [Op.in]: termTaxonomyIds
           }
         }
@@ -78,7 +80,7 @@ class PostsController {
         terms: terms, // 新闻分类
         title: pageTitle(),
         // Primary page content
-        posts: wp.posts().page(pages.current),
+        posts: posts,
         sidebar: contentService.getSidebarContent()
       })
 

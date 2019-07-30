@@ -1,12 +1,5 @@
 /* jshint indent: 2 */
 
-var classMethods={
-
-  mainmenu: function(){
-    
-  }
-}
-
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('WpPost', {
     ID: {

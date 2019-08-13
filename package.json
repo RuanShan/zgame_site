@@ -25,6 +25,7 @@
     "node": ">=9.x"
   },
   "dependencies": {
+    "ali-oss": "^6.1.1",
     "autolinker": "^1.6.2",
     "babel-preset-react": "^6.24.1",
     "babel-register": "^6.26.0",

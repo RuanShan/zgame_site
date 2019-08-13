@@ -2,7 +2,6 @@
 require('promise-hash')
 //const joi  = require( 'joi')
 const  { WpPost, Sequelize } = require('../models')
-const wp = require( '../services/wp' );
 const contentService = require( '../services/content-service' );
 const pageNumbers = require( '../services/page-numbers' );
 const pageTitle = require( '../services/page-title' );
@@ -27,10 +26,10 @@ class CasesController {
             page: page, // 当前页面信息, 决定当前页面类型，
             archiveBase: '',
             pages: mainmenu,
-            title: pageTitle(),
+            title: 'pageTitle',
             // Primary page content
-            posts: wp.posts().page( pages.current ),
-            sidebar: contentService.getSidebarContent()
+            posts: [],
+            //sidebar: contentService.getSidebarContent()
           })
 
           await ctx.render( 'posts', context )

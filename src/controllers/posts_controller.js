@@ -1,17 +1,17 @@
 require('promise-hash')
 //const joi  = require( 'joi')
 const {
-  WpPost,
-  WpTerm,
-  WpTermTaxonomy,
+
   Sequelize,
-  SharedPost
+  SharedPost,
+  SharedTerm
 } = require('../models')
 const pageNumbers = require('../services/page-numbers');
 
 const {
   getPageCssClass
 } = require('../helpers/wp_page');
+const { mainmenu } = require( '../services/site' );
 
 const Op = Sequelize.Op;
 
@@ -22,23 +22,10 @@ class PostsController {
     const category = ctx.params.category
 
     let pages = pageNumbers(ctx.params.page);
-    const mainmenu = WpPost.scope(['isPage']).findAll({
-      where: {
-        menu_order: {
-          [Op.gt]: 0
-        }
-      },
-      order: ['menu_order']
-    })
+
     // news id = 9
-    const terms = await WpTerm.findAll({
-      include: [{
-        association: 'WpTermTaxonomy',
-        where: {
-          parent: 9
-        }
-      }]
-    })
+    let categories = await SharedTerm.findAll({where:{ parent: 7}})
+    let sidebar = { categories }
 
     // let termTaxonomies = WpTermTaxonomy.findAll({
     //   where: {
@@ -52,16 +39,15 @@ class PostsController {
     // })
 
     // 找到最近的12篇文章
-    const termTaxonomyIds = []
-    terms.map((term) => {
-      return term.getWpTermTaxonomy().term_taxonomy_id
+    const termids = categories.map((term) => {
+      return term.id
     })
-    const posts = WpPost.findAll({
+    const posts = SharedPost.findAll({
       include: [{
-        association: 'WpTermTaxonomies',
+        association: 'TermRelationships',
         where: {
-          term_taxonomy_id: {
-            [Op.in]: termTaxonomyIds
+          term_id: {
+            [Op.in]: termids
           }
         }
       }]
@@ -76,11 +62,10 @@ class PostsController {
         archiveBase: '',
         pages: mainmenu,
         page: page, // 当前页面信息, 决定当前页面类型，
-        terms: terms, // 新闻分类
         title: 'pageTitle',
         // Primary page content
         posts: posts,
-        //sidebar: contentService.getSidebarContent()
+        sidebar
       })
 
       await ctx.render('posts', context)

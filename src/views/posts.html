@@ -9,12 +9,12 @@
             <div class="post col-sm-6">
               <h2>
                 <a href="{{postUrl post}}">
-                  {{{post.post_title}}}
+                  {{{post.title}}}
                 </a>
               </h2>
               <p class="text-muted">by {{post.post_author}}</p>
-              {{#if post.post_excerpt}}
-                <p>{{{post.post_excerpt}}}</p>
+              {{#if post.excerpt}}
+                <p>{{{post.excerpt}}}</p>
               {{/if}}
             </div>{{!-- .post --}}
 

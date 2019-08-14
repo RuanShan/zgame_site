@@ -1,7 +1,7 @@
 
 require('promise-hash')
 //const joi  = require( 'joi')
-const  { SharedPost,  Sequelize } = require('../models')
+const  { SharedPost, SharedTerm, Sequelize } = require('../models')
 
 const pageNumbers = require( '../services/page-numbers' );
 
@@ -17,7 +17,9 @@ class CasesController {
     async index(ctx) {
         const query = ctx.query
         let pages = pageNumbers( ctx.params.page );
-
+        // 案例分类 根分类id = 4
+        let categories = await SharedTerm.findAll({where:{ parent: 4}})
+        let sidebar = { categories }
         // const page = WpPost.scope(['isPage']).findOne( {where:{ menu_order:{ [Op.eq]: 1}}, order:[ 'menu_order']})
         const posts = SharedPost.findAll()
         const page = { menu_order: 2 }
@@ -31,7 +33,7 @@ class CasesController {
             title: 'pageTitle',
             // Primary page content
             posts: posts,
-            //sidebar: contentService.getSidebarContent()
+            sidebar
           })
 
           await ctx.render( 'posts', context )

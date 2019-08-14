@@ -1,11 +1,11 @@
 
 require('promise-hash')
 //const joi  = require( 'joi')
-const  { WpPost, Sequelize } = require('../models')
-const contentService = require( '../services/content-service' );
+const  { Sequelize } = require('../models')
 const pageNumbers = require( '../services/page-numbers' );
-const pageTitle = require( '../services/page-title' );
 const { getPageCssClass } = require( '../helpers/wp_page' );
+
+const { mainmenu } = require( '../services/site' );
 
 const Op = Sequelize.Op;
 
@@ -14,9 +14,11 @@ const Op = Sequelize.Op;
 class HomeController {
     async index(ctx) {
         const query = ctx.query
+        // Home 案例 动态 帮助 关于 Contact 创建
 
-        const mainmenu = WpPost.scope(['isPage']).findAll( {where:{ menu_order:{ [Op.gt]: 0}}, order:[ 'menu_order']})
-        const posts = WpPost.findAll()
+        // const mainmenu = [{url: '/', title:'首页'},{url: '/case', title:'案例'},
+        //   {url: '/news', title:'动态'},{url: '/help', title:'帮助'},{url: '/about-us', title:'关于'}]
+        const posts = [] //WpPost.findAll()
         const page = { menu_order: 1 }
         page.cssClass = getPageCssClass( page )
         //Get paginated list of notes

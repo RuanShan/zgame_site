@@ -4,12 +4,11 @@ const {
   WpPost,
   WpTerm,
   WpTermTaxonomy,
-  Sequelize
+  Sequelize,
+  SharedPost
 } = require('../models')
-const wp = require('../services/wp');
-const contentService = require('../services/content-service');
 const pageNumbers = require('../services/page-numbers');
-const pageTitle = require('../services/page-title');
+
 const {
   getPageCssClass
 } = require('../helpers/wp_page');
@@ -78,10 +77,10 @@ class PostsController {
         pages: mainmenu,
         page: page, // 当前页面信息, 决定当前页面类型，
         terms: terms, // 新闻分类
-        title: pageTitle(),
+        title: 'pageTitle',
         // Primary page content
         posts: posts,
-        sidebar: contentService.getSidebarContent()
+        //sidebar: contentService.getSidebarContent()
       })
 
       await ctx.render('posts', context)

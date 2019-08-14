@@ -118,6 +118,7 @@ app.use(koaHandlebars({
 let siteInfoMiddleware = require( './middleware/site-info' );
 // Set global site info on all routes
 app.use( siteInfoMiddleware() );
+
 // Require the public router
 app.use(router.routes())
   .use(router.allowedMethods());;

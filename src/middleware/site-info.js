@@ -1,7 +1,5 @@
 'use strict';
 
-var contentService = require( '../services/content-service' );
-const wordpress = require('../config/wordpress')
 // Add the absolute url to the locals object so it is available in templates.
 // This is mainly used for the social media sharing links, to provide the
 // absolute URL to the page being shared.
@@ -9,7 +7,7 @@ module.exports = function siteInfo() {
   return async (ctx, next) => {
       //let res = await contentService.siteInfo()
 
-      ctx.request.site = wordpress.site
+      ctx.state.site={ name: '星投票', description: '简单专业的投票活动制作平台' }
 
       await next()
   }

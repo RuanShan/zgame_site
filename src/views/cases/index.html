@@ -1,0 +1,55 @@
+{{> header }}
+<main id="main" class="site-main">
+  <header class="tg-page-header tg-page-header--left">
+    <div class="tg-container tg-container--flex tg-container--flex-center tg-container--flex-space-between">
+      <h1 class="tg-page-header__title">About</h1>
+      <nav role="navigation" aria-label="Breadcrumbs" class="breadcrumb-trail breadcrumbs" itemprop="breadcrumb">
+        <ul class="trail-items" itemscope="" itemtype="http://schema.org/BreadcrumbList">
+          <meta name="numberOfItems" content="2">
+          <meta name="itemListOrder" content="Ascending">
+          <li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem" class="trail-item trail-begin">
+            <a href="https://zakrademos.com/app/" rel="home" itemprop="item"><span itemprop="name">Home</span></a>
+            <meta itemprop="position" content="1">
+          </li>
+          <li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem" class="trail-item trail-end">
+            <span itemprop="item"><span itemprop="name">About</span></span>
+            <meta itemprop="position" content="2">
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <div id="content" class="site-content">
+
+    <div class="tg-container tg-container--flex tg-container--flex-space-between">
+      <div id="primary" class="">
+        <div class="row">
+          {{#each posts as |post idx|}}
+            <div class="post col-sm-6">
+              <h2>
+                <a href="{{caseUrl post}}">
+                  {{post.name}}
+                </a>
+              </h2>
+              <p class="text-muted">by {{post.post_author}}</p>
+              {{#if post.excerpt}}
+                <p>{{{post.excerpt}}}</p>
+              {{/if}}
+            </div>{{!-- .post --}}
+
+          {{/each}}
+
+        </div><!-- .row -->
+        <div class="row">
+          <div class="col-md-12">
+            {{> pagination  }}
+          </div>
+        </div>
+      </div><!-- #primary -->
+
+      {{> sidebar sidebar }}
+    </div>
+  </div><!-- #content -->
+</main>
+{{> footer }}

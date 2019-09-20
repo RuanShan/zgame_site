@@ -1,21 +1,22 @@
-{{#if posts._paging }}
-<hr>
-<ul class="pager">
-  {{#if posts._paging.prev }}
-  <li class="previous">
-    <a href="{{archiveBase}}/page/{{pages.prev}}{%if search %}?query={{search}}{%endif%}">
-      Previous
-      <span class="hidden-sm">Posts</span>
-    </a>
-  </li>
+<nav aria-label="Page navigation">
+  {{#if pagination.pageCount}}
+
+  <ul class="pagination pagination-centered">
+    {{#paginate pagination type="first"}}
+      <li {{#if disabled}}class="disabled"{{/if}}><a href="?page={{n}}">First</a></li>
+    {{/paginate}}
+    {{#paginate pagination type="previous"}}
+      <li {{#if disabled}}class="disabled"{{/if}}><a href="?page={{n}}">Prev</a></li>
+    {{/paginate}}
+    {{#paginate pagination type="middle" limit="5"}}
+      <li {{#if active}}class="active"{{/if}}><a href="?page={{n}}">{{n}}</a></li>
+    {{/paginate}}
+    {{#paginate pagination type="next"}}
+      <li {{#if disabled}}class="disabled"{{/if}}><a href="?page={{n}}">Next</a></li>
+    {{/paginate}}
+    {{#paginate pagination type="last"}}
+      <li {{#if disabled}}class="disabled"{{/if}}><a href="?page={{n}}">Last</a></li>
+    {{/paginate}}
+  </ul>
   {{/if}}
-  {{#if posts._paging.next }}
-  <li class="next">
-    <a href="{{archiveBase}}/page/{{pages.next}}{%if search %}?query={{search}}{%endif%}">
-      Next
-      <span class="hidden-sm">Posts</span>
-    </a>
-  </li>
-  {{/if}}
-</ul>
-{{/if}}
+</nav>

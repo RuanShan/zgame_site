@@ -6,69 +6,54 @@ const {
   SharedPost,
   SharedTerm
 } = require('../models')
-const pageNumbers = require('../services/page-numbers');
+const getPagination = require('../helpers/pagination');
 
-const {
-  getPageCssClass
-} = require('../helpers/wp_page');
 const { mainmenu } = require( '../services/site' );
 
 const Op = Sequelize.Op;
+const currentPage = { hasSidebar: true }
 
 
 
 class PostsController {
   async index(ctx) {
-    const category = ctx.params.category
+    let termId = ctx.params.termId
 
-    let pages = pageNumbers(ctx.params.page);
+    let paging = getPagination( ctx.query.page );
 
+    let options = { include:[{association:'Covers'}], where: {}, limit: paging.paginate, offset: paging.offset }
+
+    if( termId){
+      options.include.push({ association: 'TermRelationships', where:{term_id:termId}})
+    }
     // news id = 9
     let categories = await SharedTerm.findAll({where:{ parent: 7}})
     let sidebar = { categories }
 
-    // let termTaxonomies = WpTermTaxonomy.findAll({
-    //   where: {
-    //     parent: 9
-    //   },
-    //   includes: [{
-    //     association: 'WpTerm'
-    //   }, {
-    //     association: 'WpPost'
-    //   }]
+    // 找到最近的12篇文章
+    // const termids = categories.map((term) => {
+    //   return term.id
     // })
 
-    // 找到最近的12篇文章
-    const termids = categories.map((term) => {
-      return term.id
-    })
-    const posts = SharedPost.findAll({
-      include: [{
-        association: 'TermRelationships',
-        where: {
-          term_id: {
-            [Op.in]: termids
-          }
-        }
-      }]
-    })
-    const page = {
-      menu_order: 2
-    }
-    page.cssClass = getPageCssClass(page)
+    const { rows, count } = await SharedPost.findAndCount(options)
+    let pages = Math.ceil( count/paging.paginate )
+    console.debug( " pages, total termId", pages, count, termId)
+    const posts = rows
+    const pagination = { page: paging.page, pageCount: pages }
+
     //Get paginated list of notes
     try {
       let context = await Promise.hash({
+        currentPage: currentPage, // 当前页面信息, 决定当前页面类型，
         archiveBase: '',
         pages: mainmenu,
-        page: page, // 当前页面信息, 决定当前页面类型，
         title: 'pageTitle',
         // Primary page content
         posts: posts,
+        pagination,
         sidebar
       })
-
-      await ctx.render('posts', context)
+      await ctx.render('posts/index', context)
 
     } catch (error) {
       console.log(error)

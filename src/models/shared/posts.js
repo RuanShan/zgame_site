@@ -1,4 +1,5 @@
-var moment = require('moment')
+const sequelizePaginate = require('sequelize-paginate')
+const moment = require('moment')
 
 module.exports = (sequelize, DataTypes) => {
   const model = sequelize.define('SharedPost', {
@@ -44,5 +45,7 @@ module.exports = (sequelize, DataTypes) => {
     updatedAt: 'updated_at',
     tableName: 'shared_posts'
   })
+  sequelizePaginate.paginate(model)
+
   return model
 }

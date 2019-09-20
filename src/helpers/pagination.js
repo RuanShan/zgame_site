@@ -10,15 +10,20 @@
  @param current {Integer} The integer representing the current page number
  @return {String} An object with `current`, `prev` and `next` page numbers
  */
-function pageNumbers( current ) {
+function getPagination( current ) {
   // Request params come through as strings: convert to integers
   // If "current" is undefined, assume we're on the first page
   current = parseInt( current || 1, 10 );
+  let paginate = 25
+  let offset = (current -1) * paginate
   return {
+    page: current, // it is for model.paginate
+    offset,
+    paginate: 25,
     prev: current - 1,
     current: current,
     next: current + 1
   };
 }
 
-module.exports = pageNumbers;
+module.exports = getPagination;

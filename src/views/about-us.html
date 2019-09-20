@@ -1,0 +1,20 @@
+{{> header }}
+
+<main id="main" class="site-main">
+  <div id="content" class="site-content">
+
+    <div class="tg-container tg-container--flex tg-container--flex-space-between">
+      <div id="primary" class="content-area pagebuilder-content">
+        <h1>
+          {{ message }}
+          <small>{{ error.status }}</small>
+        </h1>
+        {%if error.stack %}
+        <pre>{{{ error.stack }}}</pre>
+        {%endif%}
+
+      </div>
+    </div>
+  </div>
+</main>
+{{> footer }}

@@ -7,4 +7,6 @@ module.exports = {
      ossPath: process.env.ALI_OSS_PATH || "my-app-files",
      // Bucket mode: [public, private], default: public
      ossMode: process.env.ALI_OSS_MODE || "public",
+     // oss的自定义域名
+     ossUrlBase: process.env.ALI_OSS_URL_BASE
 }

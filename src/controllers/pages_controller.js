@@ -6,7 +6,7 @@ const  { Sequelize } = require('../models')
 const { mainmenu } = require( '../services/site' );
 
 const Op = Sequelize.Op;
-const currentPage = { hasSidebar: false }
+const currentPage = {   }
 
 
 

@@ -1,0 +1,17 @@
+a:focus, a:hover{
+    text-decoration: none;
+}
+* {
+    font-family: Microsoft YaHei,微软雅黑,PingFang SC,Arial;
+}
+.ellipsis{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.placeholder{
+  background-position: center;
+  background-size: cover;
+  background-image: url('../image/placeholder.jpg');
+}

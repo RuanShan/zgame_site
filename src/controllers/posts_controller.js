@@ -11,7 +11,8 @@ const getPagination = require('../helpers/pagination');
 const { mainmenu } = require( '../services/site' );
 
 const Op = Sequelize.Op;
-const currentPage = { hasSidebar: true }
+const currentPage = { type: 'news', hasSidebar: true }
+const termRootId = 7
 
 
 
@@ -22,13 +23,18 @@ class PostsController {
     let paging = getPagination( ctx.query.page );
 
     let options = { include:[{association:'Covers'}], where: {}, limit: paging.paginate, offset: paging.offset }
+    let currentTerm = null
 
     if( termId){
       options.include.push({ association: 'TermRelationships', where:{term_id:termId}})
+      currentTerm = SharedTerm.findByPk(termId)
+    }else{
+      currentTerm = SharedTerm.findByPk(termRootId)
     }
+
+
     // news id = 9
-    let categories = await SharedTerm.findAll({where:{ parent: 7}})
-    let sidebar = { categories }
+    let sidebar = getSidebarContext()
 
     // 找到最近的12篇文章
     // const termids = categories.map((term) => {
@@ -45,11 +51,11 @@ class PostsController {
     try {
       let context = await Promise.hash({
         currentPage: currentPage, // 当前页面信息, 决定当前页面类型，
-        archiveBase: '',
+        currentTerm,
         pages: mainmenu,
         title: 'pageTitle',
         // Primary page content
-        posts: posts,
+        posts,
         pagination,
         sidebar
       })
@@ -66,5 +72,11 @@ class PostsController {
 
 }
 
+async function  getSidebarContext(){
+
+      // 案例分类 根分类id = 4
+      let terms = await SharedTerm.findAll({where:{ parent: termRootId}})
+      return { categories:terms }
+}
 
 export default PostsController

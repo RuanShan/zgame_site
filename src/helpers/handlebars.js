@@ -12,23 +12,41 @@ function postUrl(post, options) {
 function caseUrl(doc, options) {
   return (`/case/detail/${doc.id}`);
 }
+function caseByTermUrl(doc, options) {
+  return doc.id ? `/case/category/${doc.id}` : '/case'
+}
 function pageUrl( page, options) {
   let baseUrl =  options.data.koa.request.path
   return (`${baseUrl}?page=${page}`);
 }
+function postCoverUrl( post ){
+  let images = post.Covers
+  return images.length > 0  ? images[0].previewUrl : ''
+}
 
+function gameRoundSlideUrl( round ){
+  let images = round.Slides
+  return images.length > 0  ? images[0].previewUrl : ''
+}
 
 function toJSON(obj) {    return JSON.stringify(obj, null, 3); }
 function serverTime() {    return new Date().getTime(); }
-function bodyCssClass( ){
-  if( this.currentPage.hasSidebar ){
+function bodyCssClass( options ){
+  console.debug( "options=", options.data.view)
+  if( options.data.view=='index' ){
+    return 'tg-site-layout--stretched'
+  }else if ( this.currentPage.type=='news' ){
     return ''
   }else{
-    return 'tg-site-layout--stretched'
+    return 'tg-site-layout--default'
   }
-
 }
 
 
 
-module.exports = {toJSON, serverTime, postUrl,  caseUrl, pageUrl, bodyCssClass, paginate, paginate1 }
+module.exports = {toJSON, serverTime,
+  postUrl,  caseUrl, pageUrl, caseByTermUrl,
+  postCoverUrl,
+  bodyCssClass,
+  gameRoundSlideUrl,
+  paginate }

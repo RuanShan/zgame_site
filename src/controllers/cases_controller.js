@@ -4,15 +4,11 @@ const {
   SharedPost,
   SharedTerm,
   ZTouPiaoGameRound,
+  ZTouPiaoAlbum,
   Sequelize
 } = require('../models')
 
 const getPagination = require('../helpers/pagination');
-
-
-const {
-  mainmenu
-} = require('../services/site');
 
 const currentPage = {
   hasSidebar: false
@@ -95,7 +91,6 @@ CasesController.prototype.index = async function(ctx) {
       currentPage, // 当前页面设置hasSidebar
       currentTerm,
       filters,
-      pages: mainmenu,
       title: 'pageTitle',
       // Primary page content
       posts,
@@ -118,11 +113,24 @@ CasesController.prototype.index = async function(ctx) {
  */
 CasesController.prototype.show = async function(ctx) {
   const id = ctx.params.id
-  let round = await ZTouPiaoGameRound.findByPk(id)
+  let gameRound = await ZTouPiaoGameRound.findByPk(id)
+  let currentTerm = await SharedTerm.findByPk(termRootId)
+
+  let gameAlbums = await ZTouPiaoAlbum.findAll({
+    where: {
+      game_round_id: gameRound.id,
+    },
+    include: [{
+      attributes: ['okey'],
+      association: 'Photos'
+    }]
+  })
 
   let context = {
     currentPage,
-    round
+    currentTerm,
+    gameRound,
+    gameAlbums
   }
   await ctx.render('cases/show', context)
 }

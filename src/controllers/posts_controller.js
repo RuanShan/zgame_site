@@ -26,9 +26,10 @@ class PostsController {
     let currentTerm = null
 
     if( termId){
-      options.include.push({ association: 'TermRelationships', where:{term_id:termId}})
+      options.include.push({ association: 'Terms', where:{ id:termId}})
       currentTerm = SharedTerm.findByPk(termId)
     }else{
+      options.include.push({ association: 'Terms'})
       currentTerm = SharedTerm.findByPk(termRootId)
     }
 

@@ -3,8 +3,6 @@ require('promise-hash')
 //const joi  = require( 'joi')
 const  { Sequelize } = require('../models')
 
-const { mainmenu } = require( '../services/site' );
-
 const Op = Sequelize.Op;
 const currentPage = {   }
 
@@ -26,7 +24,6 @@ class PagesController {
           let context = await Promise.hash({
             currentPage,
             archiveBase: '',
-            pages: mainmenu,
             title: 'pageTitle',
             // Primary page content
             posts: posts, //wp.posts().page( pages.current ),

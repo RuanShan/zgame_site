@@ -15,3 +15,11 @@ a:focus, a:hover{
   background-size: cover;
   background-image: url('../image/placeholder.jpg');
 }
+
+.flex{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: row;
+}

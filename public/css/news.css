@@ -1,0 +1,32 @@
+.entry-meta>div {
+    margin-right: 1.5rem;
+    display: inline-block;
+}
+.entry-meta {
+    margin: 0 0 1.5em;
+    border: 0 solid #e9ecef;
+}
+
+.entry-meta .term{
+  margin: 0 0 0 0.4em;
+}
+
+.hentry {
+    margin: 0 0 5em;
+    border: 0 solid #e9ecef;
+}
+.entry-content {
+    margin: 0 0 3em;
+}
+.entry-title {
+    margin: 0 0 .5em;
+    font-size: 2.25rem;
+    word-wrap: break-word;
+}
+.post-thumbnail {
+    margin: 0 0 1.5em;
+}
+.posts.site-content {
+    margin-top: 80px;
+    margin-bottom: 80px;
+}

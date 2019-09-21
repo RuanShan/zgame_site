@@ -14,9 +14,10 @@ const casesController = new CasesController()
 
 router.get( '/', pageController.index );
 router.get( '/about-us', pageController.aboutUs );
-router.get( '/news', postsController.index );
-router.get( '/news/category', postsController.index );
-router.get( '/news/category/:termId', postsController.index );
+router.get( '/posts', postsController.index );
+router.get( '/posts/category', postsController.index );
+router.get( '/posts/category/:termId', postsController.index );
+router.get( '/posts/detail/:id', postsController.show );
 router.get( '/case', casesController.index );
 router.get( '/case/category', casesController.index );
 router.get( '/case/category/:termId', casesController.index );

@@ -1,11 +1,11 @@
-{{#if pages.length }}
+{{#if @mainmenu.length }}
 
   <nav id="site-navigation" class="main-navigation tg-primary-menu tg-primary-menu--style-underline">
 
     <div class="menu">
       <ul id="primary-menu" class="menu-primary nav-menu" aria-expanded="false">
 
-        {{#each pages }}
+        {{#each @mainmenu }}
           <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item current_page_item">
             <a href="{{url}}">{{{title}}}</a>
           </li>

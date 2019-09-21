@@ -1,7 +1,6 @@
 require('promise-hash')
 //const joi  = require( 'joi')
 const {
-
   Sequelize,
   SharedPost,
   SharedTerm
@@ -68,7 +67,20 @@ class PostsController {
     }
   }
   async show(ctx) {
+    const id = ctx.params.id
+    let sidebar = await getSidebarContext()
 
+    let options = { include:[{association:'Covers'}], where: {}  }
+    let post = await SharedPost.findByPk(id,options)
+
+
+
+    let context = {
+      currentPage,
+      sidebar,
+      post
+    }
+    await ctx.render('posts/show', context)
   }
 
 }

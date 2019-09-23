@@ -6,6 +6,8 @@ const  { Sequelize } = require('../models')
 const Op = Sequelize.Op;
 const currentPage = {   }
 
+// 分类-帮助的id
+const termHelpRootId = 4
 
 
 class PagesController {
@@ -41,6 +43,15 @@ class PagesController {
     async aboutUs(ctx){
       let context = {currentPage}
       await ctx.render( 'about-us', context )
+
+    }
+    async faq(ctx){
+      let currentTerm = {name: '帮助'}
+      let context = {
+        currentPage,
+        currentTerm
+      }
+      await ctx.render( 'faq', context )
 
     }
 }

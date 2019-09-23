@@ -27,8 +27,7 @@ app.use(
     ratelimit({
         db: new redis(),
         duration: 60000,
-        errorMessage:
-            "Hmm, you seem to be doing that a bit too much - wouldn't you say?",
+        errorMessage: 'Sometimes You Just Have to Slow Down.',
         id: ctx => ctx.ip,
         headers: {
             remaining: 'Rate-Limit-Remaining',

@@ -23,7 +23,7 @@ router.get( '/case/category', casesController.index );
 router.get( '/case/category/:termId', casesController.index );
 router.get( '/case/tag/:tagId', casesController.show );
 router.get( '/case/detail/:id', casesController.show );
-// router.get( '/page/:page', require( './index' ) );
+router.get( '/faq', pageController.faq );
 // // router.use( '/search', require( './search' ) );
 // // router.use( '/:year/:month', require( './archive-year-month' ) );
 // router.get( '/:year/:month/:slug', require( './single' ) );

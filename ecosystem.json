@@ -1,9 +1,9 @@
 {
     "apps" : [
             {
-            "name": "koa-vue-notes-api",
+            "name": "ZGameSite",
             "script": "app.js",
-            "instances": 2,
+            "instances": 1,
             "exec_mode": "cluster",
         }
     ]

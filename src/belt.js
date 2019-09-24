@@ -1,7 +1,7 @@
 // Node
 const crypto = require('crypto')
 // 3rd
-const scrypt = require('scrypt')
+//const scrypt = require('scrypt')
 const escapeHtml = require('escape-html')
 const assert = require('better-assert')
 const debug = require('debug')('app:belt')
@@ -75,21 +75,21 @@ exports.slugify = (() => {
 
 // //////////////////////////////////////////////////////////
 
-exports.scrypt = {
-    // Returns Promise<bool>
-    async verifyHash(password, hash) {
-        assert(typeof password === 'string')
-        assert(Buffer.isBuffer(hash))
-        return scrypt.verifyKdf(hash, password)
-    },
-
-    // Returns Promise<Buffer>
-    async hash(password) {
-        assert(typeof password === 'string')
-        // Hashing should take 0.1 seconds
-        return scrypt.params(0.1).then((params) => scrypt.kdf(password, params))
-    },
-}
+// exports.scrypt = {
+//     // Returns Promise<bool>
+//     async verifyHash(password, hash) {
+//         assert(typeof password === 'string')
+//         assert(Buffer.isBuffer(hash))
+//         return scrypt.verifyKdf(hash, password)
+//     },
+//
+//     // Returns Promise<Buffer>
+//     async hash(password) {
+//         assert(typeof password === 'string')
+//         // Hashing should take 0.1 seconds
+//         return scrypt.params(0.1).then((params) => scrypt.kdf(password, params))
+//     },
+// }
 
 // Used to lightly process user-submitted message markup before
 // saving to database.

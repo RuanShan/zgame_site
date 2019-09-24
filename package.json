@@ -22,7 +22,7 @@
     "arrowParens": "always"
   },
   "engines": {
-    "node": ">=9.x"
+    "node": ">=8.x"
   },
   "dependencies": {
     "ali-oss": "^6.1.1",

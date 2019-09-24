@@ -41,7 +41,9 @@ class PagesController {
     }
 
     async aboutUs(ctx){
-      let context = {currentPage}
+      let currentTerm = {name: '关于我们'}
+
+      let context = {currentPage, currentTerm}
       await ctx.render( 'about-us', context )
 
     }

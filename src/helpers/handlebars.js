@@ -6,6 +6,14 @@ var paginate1 = require('ghost-paginator')
 var paginate = require('handlebars-paginate');
 const { urlBase } = require('../config/game')
 
+function isCurrentUrl( url, options ){
+  let currentUrl =  options.data.koa.request.path
+
+  if ( url == currentUrl ) {
+      return options.fn(this);
+  }
+  return options.inverse(this);
+}
 function postUrl(post, options) {
   // /{{post.date|get-year}}/{{post.date|get-month}}/{{post.slug}}
   return new Handlebars.SafeString(`/posts/detail/${post.id}`);
@@ -63,6 +71,7 @@ function bodyCssClass( options ){
 
 module.exports = {
   toJSON, serverTime,formatDatetime,
+  isCurrentUrl,
   postUrl,  caseUrl, pageUrl, caseByTermUrl,
   postCoverUrl,
   bodyCssClass,

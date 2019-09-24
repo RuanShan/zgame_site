@@ -142,3 +142,21 @@ text-transform: uppercase;
   margin: 138px 0 138px 0;
   padding: 0 0 0 0;
 }
+
+/* footer */
+.tg-site-footer .tg-site-footer-bar {
+    background-color: #f8f9fa;
+    background-image: ;
+    background-repeat: repeat;
+    background-position: center center;
+    background-size: contain;
+    background-attachment: scroll;
+}
+
+.tg-site-footer .tg-site-footer-bar {
+    padding-top: 1em;
+    padding-bottom: 1em;
+    border-top: 0 solid #e9ecef;
+    border-top-width: 1px;
+    border-top-color: #f1f2f3;
+}

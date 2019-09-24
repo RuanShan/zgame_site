@@ -16,7 +16,7 @@ import redis from 'ioredis'
 
 //Routes
 import router from './routes/public'
-const { mainmenu } = require( './services/site' );
+const { site, mainmenu } = require( './services/site' );
 
 const env = process.env.NODE_ENV
 //Initialize app
@@ -113,12 +113,12 @@ app.use(koaHandlebars({
     partialsDir:  path.join( 'views','partials'),
     layoutsDir:  path.join( 'views','layouts'),
     helpers: handlebarsHelper,
-    data:{ mainmenu }
+    data:{ mainmenu, site }
 }));
 
-let siteInfoMiddleware = require( './middleware/site-info' );
+//let siteInfoMiddleware = require( './middleware/site-info' );
 // Set global site info on all routes
-app.use( siteInfoMiddleware() );
+//app.use( siteInfoMiddleware() );
 
 // Require the public router
 app.use(router.routes())

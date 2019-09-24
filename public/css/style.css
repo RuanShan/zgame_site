@@ -2,8 +2,8 @@
 @import '../vendor/bootstrap-3.3.7/css/bootstrap-theme.min.css';
 @import '../vendor/zakra/css/zakra.css';
 @import 'theme/frontend.min.css';
-@import 'theme/post-33.css';
 @import 'app.css';
+@import 'home.css';
 @import 'news.css';
 @import 'case.css';
 .sharedaddy{display:none}

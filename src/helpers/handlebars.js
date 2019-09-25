@@ -50,6 +50,22 @@ function gamePreviewUrl( round ){
 
 function toJSON(obj) {    return JSON.stringify(obj, null, 3); }
 
+function pageTitle( options ){
+  let title=''
+  let post = this.post
+  let gameRound = this.gameRound
+  let currentTerm = this.currentTerm
+  if( post ){
+    title +=  post.title + ' - '
+  }
+  if( gameRound ){
+    title +=  gameRound.name + ' - '
+  }
+  if( currentTerm && currentTerm.name ){
+    title +=  currentTerm.name + ' - '
+  }
+  return `${title}${options.data.site.name}-大连软山网络有限公司`
+}
 function serverTime() {    return new Date().getTime(); }
 
 function formatDatetime( date ){
@@ -71,6 +87,7 @@ function bodyCssClass( options ){
 
 module.exports = {
   toJSON, serverTime,formatDatetime,
+  pageTitle,
   isCurrentUrl,
   postUrl,  caseUrl, pageUrl, caseByTermUrl,
   postCoverUrl,

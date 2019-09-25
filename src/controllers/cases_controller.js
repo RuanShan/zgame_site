@@ -91,7 +91,6 @@ CasesController.prototype.index = async function(ctx) {
       currentPage, // 当前页面设置hasSidebar
       currentTerm,
       filters,
-      title: 'pageTitle',
       // Primary page content
       posts,
       pagination,

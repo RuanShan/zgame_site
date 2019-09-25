@@ -53,7 +53,6 @@ class PostsController {
         currentPage: currentPage, // 当前页面信息, 决定当前页面类型，
         currentTerm,
         pages: mainmenu,
-        title: 'pageTitle',
         // Primary page content
         posts,
         pagination,

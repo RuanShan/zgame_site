@@ -10,7 +10,7 @@
             <a href="{{url}}">{{{title}}}</a>
           </li>
         {{/each}}
-        <li class="menu-item tg-header-button-wrap"><a href="https://game.ruanshan.com/backend" target="&quot;_blank&quot;">创建活动</a></li>
+        <li class="menu-item tg-header-button-wrap"><a href="https://game.ruanshan.com/backend/index.html" target="&quot;_blank&quot;">创建活动</a></li>
       </ul>
     </div>
   </nav><!-- #site-navigation -->
@@ -25,4 +25,19 @@
     </ul>
     <!-- /.zakra-header-action-list -->
   </nav><!-- #header-action -->
+
+
+  <nav id="mobile-navigation" class="tg-mobile-navigation">
+    <div class="menu-primary-menu-container">
+      <ul id="primary-menu" class="menu">
+        {{#each @mainmenu }}
+          <li class="menu-item menu-item-type-post_type menu-item-object-page {{#isCurrentUrl url}} current-menu-item  {{/isCurrentUrl}}">
+            <a href="{{url}}">{{{title}}}</a>
+          </li>
+        {{/each}}
+        <li class="menu-item tg-header-button-wrap"><a href="#" target="&quot;_blank&quot;">Get it now</a></li>
+      </ul>
+    </div> 
+  </nav>
+
 {{/if}}

@@ -20,5 +20,5 @@
 
 (function( $ ) {
   $('.elementor-image-carousel').slick({ arrows: false, dots: true })
-  $('.elementor-image-carousel5').slick({ arrows: false, dots: true, infinite: true,  slidesToShow: 5,  slidesToScroll: 1 })
+  $('.elementor-image-carousel5').slick({ lazyLoad:'ondemand', arrows: false, dots: true, infinite: true,  slidesToShow: 5,  slidesToScroll: 1 })
 })( jQuery );

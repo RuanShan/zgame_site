@@ -125,11 +125,26 @@
   padding: 119px 0px 0px 0px;
 }
 
-.elementor-33 .elementor-element.elementor-element-b5a8f86 .elementor-image-carousel-wrapper .elementor-image-carousel .slick-dots li button:before {
+.elementor-slick-slider  .slick-dots li button:before {
   font-size: 8px;
   color: #8d02ad;
+  background-color: #8d02ad;
+  border-radius: 100%;
 }
+.elementor-slick-slider .elementor-image-carousel5 .slick-dots li button:before {
+  background-color: #fff;
+  top: 5px;
+}
+.elementor-slick-slider ul.slick-dots li button:before {
+    font-family: inherit;
+    position: absolute;
+    top: 0;
+    left: 5px;
+    width: 10px;
+    height: 10px;
+    content: "";
 
+}
 .elementor-33 .elementor-element.elementor-element-dca7f32 {
   overflow: hidden;
   transition: background 0.3s, border 0.3s, border-radius 0.3s, box-shadow 0.3s;
@@ -2164,4 +2179,8 @@ a:hover, a:focus, .tg-primary-menu>div ul li:hover>a, .tg-primary-menu>div ul li
 }
 .tg-mobile-navigation>div>ul {
     border-top: 1px solid #e9ecef;
+}
+
+.slick-slide:focus{
+  outline: 0;
 }

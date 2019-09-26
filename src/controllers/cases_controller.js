@@ -1,5 +1,6 @@
 require('promise-hash')
 //const joi  = require( 'joi')
+const { termCaseRootId } = require( '../config/game')
 const {
   SharedPost,
   SharedTerm,
@@ -15,8 +16,6 @@ const currentPage = {
 }
 
 const Op = Sequelize.Op;
-
-const termRootId = 4
 
 
 function CasesController() {}
@@ -48,7 +47,7 @@ CasesController.prototype.index = async function(ctx) {
     })
     currentTerm = SharedTerm.findByPk(termId)
   } else {
-    currentTerm = SharedTerm.findByPk(termRootId)
+    currentTerm = SharedTerm.findByPk(termCaseRootId)
   }
 
   // 案例分类 根分类id = 4
@@ -56,7 +55,7 @@ CasesController.prototype.index = async function(ctx) {
   // 过滤条件
   let terms = await SharedTerm.findAll({
     where: {
-      parent: termRootId
+      parent: termCaseRootId
     }
   })
   let filters = terms.map((term) => {
@@ -113,7 +112,7 @@ CasesController.prototype.index = async function(ctx) {
 CasesController.prototype.show = async function(ctx) {
   const id = ctx.params.id
   let gameRound = await ZTouPiaoGameRound.findByPk(id)
-  let currentTerm = await SharedTerm.findByPk(termRootId)
+  let currentTerm = await SharedTerm.findByPk(termCaseRootId)
 
   let gameAlbums = await ZTouPiaoAlbum.findAll({
     where: {
@@ -139,7 +138,7 @@ async function getSidebarContext() {
   // 案例分类 根分类id = 4
   let terms = await SharedTerm.findAll({
     where: {
-      parent: termRootId
+      parent: termCaseRootId
     }
   })
   return {

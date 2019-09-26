@@ -22,3 +22,19 @@
   $('.elementor-image-carousel').slick({ arrows: false, dots: true })
   $('.elementor-image-carousel5').slick({ lazyLoad:'ondemand', arrows: false, dots: true, infinite: true,  slidesToShow: 5,  slidesToScroll: 1 })
 })( jQuery );
+
+// (function( $ ) {
+//   $('body').scrollspy({ target: '.achievement' })
+//
+//   $('.achievement').on('activate.bs.scrollspy', function (e) {
+//     console.log( " e =", e)
+//     $(".elementor-counter-number",this).each( function() {
+//                     var e = $(this)
+//                       , n = e.data()
+//                       , i = n.toValue.toString().match(/\.(.*)/);
+//                     i && (n.rounding = i[1].length),
+//                     e.numerator(n)
+//
+//     })
+//   })
+// })( jQuery );

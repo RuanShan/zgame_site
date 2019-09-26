@@ -1,5 +1,7 @@
 require('promise-hash')
 //const joi  = require( 'joi')
+const { termPostRootId } = require( '../config/game')
+
 const {
   Sequelize,
   SharedPost,
@@ -11,8 +13,6 @@ const { mainmenu } = require( '../services/site' );
 
 const Op = Sequelize.Op;
 const currentPage = { type: 'news', hasSidebar: true }
-const termRootId = 7
-
 
 
 class PostsController {
@@ -29,7 +29,7 @@ class PostsController {
       currentTerm = SharedTerm.findByPk(termId)
     }else{
       options.include.push({ association: 'Terms'})
-      currentTerm = SharedTerm.findByPk(termRootId)
+      currentTerm = SharedTerm.findByPk(termPostRootId)
     }
 
 
@@ -87,7 +87,7 @@ class PostsController {
 async function  getSidebarContext(){
 
       // 案例分类 根分类id = 4
-      let terms = await SharedTerm.findAll({where:{ parent: termRootId}})
+      let terms = await SharedTerm.findAll({where:{ parent: termPostRootId}})
       return { categories:terms }
 }
 

@@ -38,7 +38,10 @@
 
 
 }
-
+.about-us .description{
+  text-indent: 2em;
+  text-align: left;
+}
 .about-us .elementor-widget-container {
   text-align: center;
 }

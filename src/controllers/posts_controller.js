@@ -87,7 +87,7 @@ class PostsController {
 async function  getSidebarContext(){
 
       // 案例分类 根分类id = 4
-      let terms = await SharedTerm.findAll({where:{ parent: termPostRootId}})
+      let terms = await SharedTerm.findAll({where:{ parent_id: termPostRootId}})
       return { categories:terms }
 }
 

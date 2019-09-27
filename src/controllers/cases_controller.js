@@ -55,7 +55,7 @@ CasesController.prototype.index = async function(ctx) {
   // 过滤条件
   let terms = await SharedTerm.findAll({
     where: {
-      parent: termCaseRootId
+      parent_id: termCaseRootId
     }
   })
   let filters = terms.map((term) => {
@@ -138,7 +138,7 @@ async function getSidebarContext() {
   // 案例分类 根分类id = 4
   let terms = await SharedTerm.findAll({
     where: {
-      parent: termCaseRootId
+      parent_id: termCaseRootId
     }
   })
   return {

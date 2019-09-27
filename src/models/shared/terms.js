@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING(255),
       defaultValue: ''
     },
-    parent: {
+    parent_id: {
       type: DataTypes.BIGINT(11)
     },
     group: {

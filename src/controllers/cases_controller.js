@@ -124,10 +124,39 @@ CasesController.prototype.show = async function(ctx) {
     }]
   })
 
+  // get previous/next game  发布日期晚的在前面，发布日期早的在后面，
+  let preGameRound = await ZTouPiaoGameRound.findOne({
+     where: {
+       publish_at: {
+         [Op.gte]: gameRound.publish_at,
+         [Op.ne]: null
+       },
+       id: {
+         [Op.ne]: gameRound.id
+       }
+     },
+     order: [
+       ['publish_at', 'DESC']
+     ]
+   })
+
+  let nextGameRound = await ZTouPiaoGameRound.findOne({ where:{
+     publish_at: {
+       [Op.lte]: gameRound.publish_at,
+       [Op.ne]: null
+     },
+     id: {
+       [Op.ne]: gameRound.id
+     }
+   }, order:[['publish_at', 'DESC']]})
+
+  console.debug('====nextGameRound=====',nextGameRound)
   let context = {
     currentPage,
     currentTerm,
     gameRound,
+    preGameRound,
+    nextGameRound,
     gameAlbums
   }
   await ctx.render('cases/show', context)

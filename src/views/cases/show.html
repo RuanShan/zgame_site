@@ -75,27 +75,26 @@
               <div  class="msg-three-box">
                 <div  class="msg-item">
                   <p  class="num">
-                    67740
+                    {{gameRound.finalResultCount}}
                   </p>
                   <p >总票数</p>
                 </div>
                 <div  class="msg-item">
                   <p  class="num">
-                    102
+                    {{gameRound.album_count}}
                   </p>
                   <p >选手数</p>
                 </div>
                 <div  class="msg-item">
                   <p  class="num">
-                    185088
+                    {{gameRound.finalVisitCount}}
                   </p>
                   <p >访问量</p>
                 </div>
               </div>
-              <div  class="QR-code">
-                <div  class="qr-img-box"><img
-                    src="data:image/png;base64,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"
-                    alt="微信投票系统"></div>
+              <div class="QR-code">
+                <div  id="qrcode" class="qr-img-box" data-src="{{gamePreviewUrl gameRound}}">
+                </div>
                 <p  class="img-describe">使用微信扫一扫查看活动</p>
               </div>
               <div  class="act-intro mb20">
@@ -123,8 +122,12 @@
                 </div>
               </div>
               <div  class="more-act f14">
-                <div  class="mb10 flex-s"><span  class="mr5 c6">上一个活动</span> <a  href="/case/details/2246?uid=350" class="ellipsis" style="width: 450px;">笔畅作文暑期班教学成果评赏投票活动</a></div>
-                <div  class="flex-s"><span  class="mr5 c6">下一个活动</span> <a  href="/case/details/2364?uid=1194" class="ellipsis" style="width: 450px;">河南中医药大学第三附属医院“迎接第二届医师节优秀医师评选”</a></div>
+                {{#if preGameRound}}
+                <div  class="mb10 flex-s"><span  class="mr5 c6">上一个活动</span> <a  href="{{caseUrl preGameRound}}" class="ellipsis" style="width: 450px;">{{preGameRound.name}}</a></div>
+                {{/if}}
+                {{#if nextGameRound}}
+                <div  class="flex-s"><span  class="mr5 c6">下一个活动</span> <a  href="{{caseUrl nextGameRound}}" class="ellipsis" style="width: 450px;">{{nextGameRound.name}}</a></div>
+                {{/if}}
               </div>
             </div>
           </div>

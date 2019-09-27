@@ -72,7 +72,7 @@ class PostsController {
     let options = { include:[{association:'Covers'}], where: {}  }
     let post = await SharedPost.findByPk(id,options)
 
-
+   // get previous/next post
 
     let context = {
       currentPage,

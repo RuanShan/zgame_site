@@ -1,5 +1,6 @@
+const Sequelize = require('sequelize')
+const Op = Sequelize.Op;
 const moment = require('moment')
-const sequelizePaginate = require('sequelize-paginate')
 
 module.exports = (sequelize, DataTypes) => {
   const model = sequelize.define('ZTouPiaoGameRound', {
@@ -91,17 +92,62 @@ module.exports = (sequelize, DataTypes) => {
     },
     color: {
       type: DataTypes.STRING(16), // Hex + opacity
-    }
-
+    },
+    wx_auth_scope: {
+      type: DataTypes.STRING(1), // get game_round by number
+      defaultValue: 'N'
+    },
+    total_scores: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: '0'
+    }, // 游戏总分数
+    result_count: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: '0'
+    }, // 游戏总票数
+    album_count: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: '0'
+    }, // 游戏总人数
+    visit_count: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: '0'
+    }, // 游戏访问量
+    virtual_result_count: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: '0'
+    }, // 虚拟游戏总票数
+    virtual_visit_count: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: '0'
+    }, // 虚拟游戏访问量
+    publish_at: {
+      type: DataTypes.DATE
+    },
   }, {
     createdAt: 'created_at',
     updatedAt: 'updated_at',
-    tableName: 'game_rounds'
+    tableName: 'game_rounds',
+    scopes: {
+      published:{
+        [Op.neq]: null
+      }
+    },
+    getterMethods:{
+      finalResultCount(){
+        return this.virtual_result_count+ this.result_count
+      },
+      finalVisitCount(){
+        return this.virtual_visit_count+ this.visit_count
+      }
+    }
   })
-  // 添加方法 model.paginate( { page: 1, paginate: 25 } )
-  // Default page = 1 and paginate = 25
-  // const { docs, pages, total } = await db.model.paginate()
-  sequelizePaginate.paginate(model)
 
   addHooks(model)
   bindClassMethods(model)
@@ -153,6 +199,10 @@ function bindClassMethods(model) {
 
 function bindMemberMethods(model) {
   model.prototype.getInfo = getInfo
+  model.prototype.previewUrl = function(){
+    return `${baseGameUrl}/${this.code}.html?number=${this.number}&preview=yes`    
+  }
+
 }
 
 /**

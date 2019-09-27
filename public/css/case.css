@@ -142,7 +142,10 @@
     padding: 70px 0;
 }
 .case-detail .pc .case-detail-box .msg-box .QR-code .qr-img-box  {
-    text-align: center;
+  width: 200px;
+  height: 200px;
+  margin: auto;
+  text-align: center;
 }
 .case-detail .pc .case-detail-box .msg-box .QR-code .img-describe  {
     font-size: 14px;

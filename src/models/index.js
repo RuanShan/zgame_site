@@ -59,7 +59,6 @@ buildAssociations( db )
 // add pagination
 //==============================================================================
 //https://www.npmjs.com/package/sequelize-paginate
-sequelizePaginate.paginate( db.WpPost )
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;

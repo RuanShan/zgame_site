@@ -72,6 +72,16 @@ function formatDatetime( date ){
   return date.toLocaleString()
 }
 
+// 如果数字较大，大于1万，如： 100001 格式化为  10万+
+// 如果数字小于1万，如： 9001 保持原  9001
+function formatNumber( number ){
+  if( number >10000){
+    `${ Math.floor(number/100)/100} 万`
+  }else{
+    `${ number} `
+  }
+}
+
 function bodyCssClass( options ){
   console.debug( "options=", options.data.view)
   if( options.data.view=='index' ){
@@ -86,7 +96,7 @@ function bodyCssClass( options ){
 
 
 module.exports = {
-  toJSON, serverTime,formatDatetime,
+  toJSON, serverTime,formatDatetime, formatNumber,
   pageTitle,
   isCurrentUrl,
   postUrl,  caseUrl, pageUrl, caseByTermUrl,

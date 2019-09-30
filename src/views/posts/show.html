@@ -19,7 +19,7 @@
                 <span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{post.author}}
                 </div>
                 <div clss="item">
-                <span class="glyphicon glyphicon-time" aria-hidden="true"></span> {{formatDatetime post.created_at}}
+                <span class="glyphicon glyphicon-time" aria-hidden="true"></span> {{formatDatetime post.publish_at}}
                 </div>
                 <div clss="item">
                 <span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>
@@ -36,8 +36,20 @@
 
         </div><!-- .row -->
         <div >
-          <nav class="navigation post-navigation" role="navigation"><h2 class="screen-reader-text">Post navigation</h2><div class="nav-links"><div class="nav-previous"><a href="https://zakrademos.com/minimal-portfolio/2019/04/22/artificial-intelligence-driven-design/" rel="prev">Artificial intelligence driven design</a></div></div></nav>
-        </div>
+          <nav class="navigation post-navigation" role="navigation">
+            <h2 class="screen-reader-text">Post navigation</h2>
+            <div class="nav-links">
+              {{#if prePost}}
+              <div class="nav-previous"><a href="{{postUrl prePost}}" rel="prev">{{prePost.title}}</a>
+              </div>
+              {{/if}}
+              {{#if nextPost}}
+              <div class="nav-next"><a href="{{postUrl nextPost}}" rel="next">{{nextPost.title}}</a>
+              </div>
+              {{/if}}
+
+            </div>
+          </nav>        </div>
       </div><!-- #primary -->
 
       {{> sidebar2 sidebar }}

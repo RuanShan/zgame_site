@@ -21,7 +21,11 @@ class PostsController {
 
     let paging = getPagination( ctx.query.page );
 
-    let options = { include:[{association:'Covers'}], where: {}, limit: paging.paginate, offset: paging.offset }
+    let options = { include:[{association:'Covers'}], where: {
+      publish_at: {
+        [Op.ne]: null
+      }
+    }, limit: paging.paginate, offset: paging.offset }
     let currentTerm = null
 
     if( termId){
@@ -72,12 +76,38 @@ class PostsController {
     let options = { include:[{association:'Covers'}], where: {}  }
     let post = await SharedPost.findByPk(id,options)
 
+    let prePost = await SharedPost.findOne({
+       where: {
+         publish_at: {
+           [Op.gte]: post.publish_at,
+           [Op.ne]: null
+         },
+         id: {
+           [Op.ne]: post.id
+         }
+       },
+       order: [
+         ['publish_at', 'DESC']
+       ]
+     })
+
+    let nextPost = await SharedPost.findOne({ where:{
+       publish_at: {
+         [Op.lte]: post.publish_at,
+         [Op.ne]: null
+       },
+       id: {
+         [Op.ne]: post.id
+       }
+    }, order:[['publish_at', 'DESC']]})
    // get previous/next post
 
     let context = {
       currentPage,
       sidebar,
-      post
+      post,
+      prePost,
+      nextPost
     }
     await ctx.render('posts/show', context)
   }

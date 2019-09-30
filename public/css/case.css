@@ -53,6 +53,7 @@
     margin-left: 10px;
     justify-content:space-around;
 }
+
 .case-list .activity-item .list-item .icon-msg .icon-msg-item {
     display: -webkit-box;
     display: -webkit-flex;
@@ -62,6 +63,9 @@
     align-items: center;
     min-width: 50px;
     margin-right: 18px;
+}
+.case-list .activity-item .list-item .icon-msg .icon-msg-item .val{
+  padding: 0 4px;
 }
 .wrapper  {
     width: 1200px;

@@ -27,7 +27,7 @@ function CasesController() {}
  *
  */
 CasesController.prototype.index = async function(ctx) {
-  const query = ctx.query
+
   let termId = ctx.params.termId
   let paging = getPagination(ctx.query.page);
 
@@ -35,7 +35,10 @@ CasesController.prototype.index = async function(ctx) {
     include: [{association:'Slides'}],
     where: {},
     limit: paging.paginate,
-    offset: paging.offset
+    offset: paging.offset,
+    order: [
+      ['publish_at', 'DESC']
+    ]
   }
   let currentTerm = null
   if (termId) {
@@ -150,13 +153,27 @@ CasesController.prototype.show = async function(ctx) {
      }
    }, order:[['publish_at', 'DESC']]})
 
-  console.debug('====nextGameRound=====',nextGameRound)
+  // 推荐最新的20个
+  let newGameRounds = await ZTouPiaoGameRound.findAll({
+    where: {
+      publish_at: {
+        [Op.ne]: null
+      }
+    },
+    limit: 20,
+    order: [
+      ['publish_at', 'DESC']
+    ]
+  })
+
+
   let context = {
     currentPage,
     currentTerm,
     gameRound,
     preGameRound,
     nextGameRound,
+    newGameRounds,
     gameAlbums
   }
   await ctx.render('cases/show', context)

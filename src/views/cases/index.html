@@ -44,10 +44,12 @@
                   <div  class="icon-msg">
                     <div  title="总票数" class="icon-msg-item">
                       <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
-                      <span >17.12万</span></div>
-                    <div  title="选手数" class="icon-msg-item"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> <span >50</span></div>
+                      <span class="val">{{ post.finalVisitCount}} </span></div>
+                    <div  title="选手数" class="icon-msg-item"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> <span  class="val">
+                      {{post.album_count}}
+                    </span></div>
                     <div  title="访问量" class="icon-msg-item">
-                      <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> <span >50</span>
+                      <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> <span class="val" >  {{post.finalResultCount}} </span>
                     </div>
                   </div>
                 </a></div>

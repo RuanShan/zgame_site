@@ -39,6 +39,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     deleted_at: {
       type: DataTypes.DATE
+    },publish_at: {
+      type: DataTypes.DATE
     }
   }, {
     createdAt: 'created_at',

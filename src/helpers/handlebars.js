@@ -4,7 +4,7 @@
 var Handlebars = require('handlebars');
 var paginate1 = require('ghost-paginator')
 var paginate = require('handlebars-paginate');
-const { urlBase } = require('../config/game')
+const { urlBase, backendUrl, demoUrl } = require('../config/game')
 
 function isCurrentUrl( url, options ){
   let currentUrl =  options.data.koa.request.path
@@ -46,7 +46,12 @@ function albumPhotoUrl( album ){
 function gamePreviewUrl( round ){
   return `${urlBase}/${round.code}.html?number=${round.number}&preview=yes`
 }
-
+function gameBackendUrl(  ){
+  return `${backendUrl}`
+}
+function gameDemoUrl(  ){
+  return `${demoUrl}`
+}
 
 function toJSON(obj) {    return JSON.stringify(obj, null, 3); }
 
@@ -98,7 +103,7 @@ function bodyCssClass( options ){
 module.exports = {
   toJSON, serverTime,formatDatetime, formatNumber,
   pageTitle,
-  isCurrentUrl,
+  isCurrentUrl, gameDemoUrl, gameBackendUrl,
   postUrl,  caseUrl, pageUrl, caseByTermUrl,
   postCoverUrl,
   bodyCssClass,

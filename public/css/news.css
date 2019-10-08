@@ -108,6 +108,9 @@ text-transform: uppercase;
     font-weight: 300;
     line-height: 66px;
 }
+.about-us .achievement .elementor-counter-number-suffix{
+  font-size: 16px;
+}
 
 /*faq*/
 

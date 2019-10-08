@@ -2184,3 +2184,7 @@ a:hover, a:focus, .tg-primary-menu>div ul li:hover>a, .tg-primary-menu>div ul li
 .slick-slide:focus{
   outline: 0;
 }
+
+.elementor-element .elementor-element-33d4bd2 img, .elementor-element .elementor-element-2d96e83 img{
+  width: 150px;
+}

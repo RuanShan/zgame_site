@@ -1,5 +1,6 @@
 import log4js from 'log4js'
 
+const isProduction = process.env.NODE_ENV === 'production'
 log4js.configure({
     appenders: {
         file: {
@@ -26,10 +27,12 @@ log4js.configure({
             level: 'info',
         },
     },
+    pm2: isProduction
+
 })
-const logger =
-    process.env.NODE_ENV === 'development'
-        ? log4js.getLogger('development')
-        : log4js.getLogger('production')
+const logger = isProduction
+
+        ? log4js.getLogger('production')
+        : log4js.getLogger('development')
 
 export default logger

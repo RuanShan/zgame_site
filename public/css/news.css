@@ -88,7 +88,7 @@ text-transform: uppercase;
   transition: background 0.3s,border 0.3s,border-radius 0.3s,box-shadow 0.3s;
   margin-top: 73px;
   margin-bottom: 73px;
-  padding: 115px 0 115px 0;
+  /* padding: 115px 0 115px 0; */
   background-color: #f8f9fb;
 }
 .about-us .achievement .elementor-widget-container {
@@ -145,8 +145,6 @@ text-transform: uppercase;
 }
 
 .faq .wrapper{
-  margin: 138px 0 138px 0;
-  padding: 0 0 0 0;
 }
 
 /* footer */
@@ -165,4 +163,12 @@ text-transform: uppercase;
     border-top: 0 solid #e9ecef;
     border-top-width: 1px;
     border-top-color: #f1f2f3;
+}
+
+@media screen and (max-width: 768px) {
+
+  .page-template-pagebuilder #main .posts .tg-container {
+      padding-left: 15px;
+      padding-right: 15px;
+  }
 }

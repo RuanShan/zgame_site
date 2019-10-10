@@ -90,11 +90,11 @@ function formatNumber( number ){
 function bodyCssClass( options ){
   console.debug( "options=", options.data.view)
   if( options.data.view=='index' ){
-    return 'tg-site-layout--stretched'
+    return 'page-template-pagebuilder tg-site-layout--stretched'
   }else if ( this.currentPage.type=='news' ){
     return ''
   }else{
-    return 'tg-site-layout--default'
+    return 'tg-site-layout--no-sidebar'
   }
 }
 

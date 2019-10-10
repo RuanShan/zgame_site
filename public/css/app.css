@@ -23,3 +23,20 @@ a:focus, a:hover{
   justify-content: flex-start;
   flex-direction: row;
 }
+
+.mb20 {
+    margin-bottom: 20px!important;
+}
+.f16 {
+    font-size: 16px;
+}
+.p20  {
+    padding: 20px!important;
+}
+.blue {
+    color: #176eca;
+}
+
+.f14 {
+    font-size: 14px;
+}

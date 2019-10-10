@@ -73,7 +73,7 @@ class PostsController {
     const id = ctx.params.id
     let sidebar = await getSidebarContext()
 
-    let options = { include:[{association:'Covers'}], where: {}  }
+    let options = { include:[{association:'Covers'},{ association: 'Terms'}], where: {}  }
     let post = await SharedPost.findByPk(id,options)
 
     let prePost = await SharedPost.findOne({

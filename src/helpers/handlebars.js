@@ -14,6 +14,28 @@ function isCurrentUrl( url, options ){
   }
   return options.inverse(this);
 }
+function ifDevice( device, options ){
+  console.debug( "isMobile= we are here")
+  let userAgent =  options.data.koa.userAgent
+  if (device== 'mobile'){
+    if (  userAgent.isMobile == true ) {
+        return options.fn(this);
+    }
+  }
+  if (device== 'desktop'){
+    if (  userAgent.isDesktop == true ) {
+        return options.fn(this);
+    }
+  }
+  if (device== 'nomobile'){
+    if (  userAgent.isMobile == false ) {
+        return options.fn(this);
+    }
+  }
+  return options.inverse(this);
+
+}
+ 
 function postUrl(post, options) {
   // /{{post.date|get-year}}/{{post.date|get-month}}/{{post.slug}}
   return new Handlebars.SafeString(`/posts/detail/${post.id}`);
@@ -89,13 +111,22 @@ function formatNumber( number ){
 
 function bodyCssClass( options ){
   console.debug( "options=", options.data.view)
-  if( options.data.view=='index' ){
-    return 'page-template-pagebuilder tg-site-layout--stretched'
-  }else if ( this.currentPage.type=='news' ){
-    return ''
-  }else{
-    return 'tg-site-layout--no-sidebar'
+  let userAgent =  options.data.koa.userAgent
+  let css = ''
+  if( userAgent.isMobile ){
+    css+= 'mobile '
   }
+  if( userAgent.isDesktop ){
+    css+= 'desktop '
+  }
+  if( options.data.view=='index' ){
+    css+='page-template-pagebuilder tg-site-layout--stretched'
+  }else if ( this.currentPage.type=='news' ){
+    //
+  }else{
+    css+= 'tg-site-layout--no-sidebar'
+  }
+  return css
 }
 
 
@@ -103,7 +134,8 @@ function bodyCssClass( options ){
 module.exports = {
   toJSON, serverTime,formatDatetime, formatNumber,
   pageTitle,
-  isCurrentUrl, gameDemoUrl, gameBackendUrl,
+  isCurrentUrl, ifDevice,
+  gameDemoUrl, gameBackendUrl,
   postUrl,  caseUrl, pageUrl, caseByTermUrl,
   postCoverUrl,
   bodyCssClass,

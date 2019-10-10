@@ -113,6 +113,7 @@ CasesController.prototype.index = async function(ctx) {
  *
  */
 CasesController.prototype.show = async function(ctx) {
+
   const id = ctx.params.id
   let gameRound = await ZTouPiaoGameRound.findByPk(id)
   let currentTerm = await SharedTerm.findByPk(termCaseRootId)
@@ -176,7 +177,12 @@ CasesController.prototype.show = async function(ctx) {
     newGameRounds,
     gameAlbums
   }
-  await ctx.render('cases/show', context)
+  let view = 'cases/show-desktop'
+
+  if( ctx.userAgent.isMobile){
+    view = 'cases/show-mobile'
+  }
+  await ctx.render(view, context)
 }
 
 async function getSidebarContext() {

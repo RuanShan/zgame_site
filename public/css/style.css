@@ -1,5 +1,6 @@
 @import '../vendor/bootstrap-3.3.7/css/bootstrap.min.css';
 @import '../vendor/bootstrap-3.3.7/css/bootstrap-theme.min.css';
+@import '../vendor/font-awesome-4.7.0/css/font-awesome.min.css';
 @import '../vendor/zakra/css/zakra.css';
 @import 'theme/frontend.min.css';
 @import 'app.css';

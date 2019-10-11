@@ -5,10 +5,13 @@ const {
   SharedPost,
   SharedTerm,
   ZTouPiaoGameRound,
+  ZTouPiaoGameResult,
   ZTouPiaoAlbum,
+  ZTouPiaoGameDay,
   Sequelize
 } = require('../models')
 
+const { GameRoundStates } = require('../models/constant')
 const getPagination = require('../helpers/pagination');
 
 const currentPage = {
@@ -167,7 +170,23 @@ CasesController.prototype.show = async function(ctx) {
     ]
   })
 
+  //如果游戏在运行状态，设置 visit_count result_count album_count
+  if (gameRound.state == GameRoundStates.started) {
+    gameRound.visit_count = await ZTouPiaoGameDay.sum('visit_count', {
+      where: {
+        game_round_id: gameRound.id
+      }
+    })
+    gameRound.result_count = await ZTouPiaoGameResult.count({
+      where: {
+        game_round_id: gameRound.id
+      }
+    })
 
+    gameRound.album_count = gameAlbums.length
+
+  }
+  console.debug( " gameRound = ", gameRound.toJSON())
   let context = {
     currentPage,
     currentTerm,

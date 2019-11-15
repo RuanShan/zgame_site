@@ -249,6 +249,10 @@
     padding: 0;
     border: 0;
 }
+.htmlWarp .html  p{
+  margin-block-start: 0;
+  margin-block-end: 0;
+}
 
 
 @media screen and (max-width: 768px) {

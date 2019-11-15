@@ -134,6 +134,12 @@ module.exports = (sequelize, DataTypes) => {
     createdAt: 'created_at',
     updatedAt: 'updated_at',
     tableName: 'game_rounds',
+    //indexes:[{ fields:'code'}],
+    defaultScope: {
+      where: {
+        code: 'ztoupiao'
+      },
+    },
     scopes: {
       published:{
         [Op.neq]: null
@@ -200,7 +206,7 @@ function bindClassMethods(model) {
 function bindMemberMethods(model) {
   model.prototype.getInfo = getInfo
   model.prototype.previewUrl = function(){
-    return `${baseGameUrl}/${this.code}.html?number=${this.number}&preview=yes`    
+    return `${baseGameUrl}/${this.code}.html?number=${this.number}&preview=yes`
   }
 
 }

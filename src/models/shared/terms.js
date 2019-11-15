@@ -16,8 +16,8 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.BIGINT(11)
     },
     group: {
-      type: DataTypes.BIGINT(11)
-    }
+      type: DataTypes.STRING(16), // 取值 gameRound, post, 需要建立索引
+    },
   }, {
     createdAt: 'created_at',
     updatedAt: 'updated_at',

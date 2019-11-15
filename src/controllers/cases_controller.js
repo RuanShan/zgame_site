@@ -36,7 +36,7 @@ CasesController.prototype.index = async function(ctx) {
 
   let options = {
     include: [{association:'Slides'}],
-    where: {},
+    where: {code: 'ztoupiao'},
     limit: paging.paginate,
     offset: paging.offset,
     order: [
@@ -48,7 +48,7 @@ CasesController.prototype.index = async function(ctx) {
     options.include.push({
       association: 'TermRelationships',
       where: {
-        code: 'ztoupiao',
+
         term_id: termId
       }
     })

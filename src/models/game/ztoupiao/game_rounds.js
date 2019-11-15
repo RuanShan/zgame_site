@@ -135,11 +135,11 @@ module.exports = (sequelize, DataTypes) => {
     updatedAt: 'updated_at',
     tableName: 'game_rounds',
     //indexes:[{ fields:'code'}],
-    defaultScope: {
-      where: {
-        code: 'ztoupiao'
-      },
-    },
+    // defaultScope: { // v4中 使用include后，并不好用
+    //   where: {
+    //     code: 'ztoupiao'
+    //   },
+    // },
     scopes: {
       published:{
         [Op.neq]: null

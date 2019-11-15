@@ -48,6 +48,7 @@ CasesController.prototype.index = async function(ctx) {
     options.include.push({
       association: 'TermRelationships',
       where: {
+        code: 'ztoupiao',
         term_id: termId
       }
     })
